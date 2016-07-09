@@ -1,6 +1,10 @@
-#include<Wire.h>
-#include<XBeeLibrary.h>
-XBeeLibrary XBee;
+/*  変更点(6/21のチェック以降)
+  waittime
+  mode
+  switch
+  割り込みの
+  whileの中身
+*/
 
 /*  マザーから各イルミへ(DIO1,0)
     全点灯   11
@@ -11,29 +15,24 @@ XBeeLibrary XBee;
     ついてる  1
     消えてる  0               */
 
+#include<Wire.h>
+#include<XBeeLibrary.h>
+XBeeLibrary XBee;
+
 const int LED0 = 8;
 const int LED1 = 9;
 const int LED2 = 10;
-
 #define waittime 7000    //各オブジェ待機時間
 #define gamelimit 33000   //ゲームの上限時間(33sec)
-
 volatile int mode = 0;    //点灯モード
 volatile int train = 0;  //電車
 volatile int dep = false;    //到着
 volatile int arri = false;   //発車
 volatile int game = 0;    //入力
-
 char traindata; //シリアル電車データ
 byte data;  //入力データ
 
-/*  変更点(6/21のチェック以降)
-  waittime
-  mode
-  switch
-  割り込みの
-  whileの中身
-*/
+
 void setup()        //セットアップ
 {
   //xbee設定
@@ -101,9 +100,17 @@ void loop()       //メイン
     {
       traindata = Serial2.read();//読み込み
       if(traindata == 'D')
+      {
+        digitalWrite(LED2,HIGH);
         ForwardAll();
+        digitalWrite(LED2,LOW);
+      }
       else /*if(traindata == 'A')*/
+      {
+        digitalWrite(LED2,HIGH);
         ReverseAll();
+        digitalWrite(LED2,LOW);
+      }
     }
     //  到着D 発車A
     train = 0;
@@ -225,7 +232,7 @@ void ForwardAll()       //順方向つけていく
     //時間取得(i番目を点けた時間)
     time = millis();
     // 15秒待機(終了状態が入力されたら離脱)
-    while(((millis()-time)<waittime)&&(train==0)&&(game==0))
+    while(((millis()-time)<waittime)/*&&(train==0)&&(game==0)*/)
     {
       train = digitalRead(A8);
       game = digitalRead(A9);
@@ -304,7 +311,7 @@ void ReverseAll()       //逆方向つけていく
     //時間取得(i番目を点けた時間)
     time = millis();
     // 15秒待機(終了状態が入力されたら離脱)
-    while(((millis()-time)<waittime)&&(train==0)&&(game==0))
+    while(((millis()-time)<waittime)/*&&(train==0)&&(game==0)*/)
     {
       train = digitalRead(A8);
       game = digitalRead(A9);
