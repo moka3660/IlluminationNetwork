@@ -126,7 +126,7 @@ void loop()       //メイン
     {
       data == Serial3.read();//シリアル3　受信
       //データ通りに光らす(データは1バイト)
-
+      InputMode(data);
       game = digitalRead(A9);//チェック
     }
   }
@@ -397,7 +397,7 @@ void RandomAll()        //ランダムつけていく
     if(flag[addr]==true)
       continue;
     else
-      flag[addr] = true;
+      flag[addr] = true;  //フラグたてて
       num++;      //点いた数を+1
     //そーしん
     // addr番目をパターン点灯(01)へ(一度保留)
@@ -423,9 +423,24 @@ void RandomAll()        //ランダムつけていく
   }
   XBee.loopAction();
 }
-/*
-void InputMode()
+
+void InputMode(byte data)
 {
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////
+  byte mask;
+  byte masked;
+  int i;
+  for(i=0;i<6;i++)
+  {
+    mask = 1; //マスクをリセット
+    mask <<= i; //シフト
+    masked = data & mask; //マスク適用
+    if(masked >= 1)
+    {
+      // i+1番目をパターン点灯(01)へ(一度保留)
+      XBee.sendRemoteATCommand(i+1, "D0", false, 1, 5);
+      XBee.sendRemoteATCommand(i+1, "D1", false, 1, 4);
+      //適用コマンド送信
+      XBee.loopAction();
+    }
+  }
 }
-*/
