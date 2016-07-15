@@ -52,14 +52,18 @@ void loop()
 
   if(digitalRead(A0)==1)
   {
+    digitalWrite(8,HIGH);
     Serial.write('D');
     delay(100);
+    digitalWrite(8,LOW);
   }
 
   if(digitalRead(A1)==1)
   {
+    digitalWrite(8,HIGH);
     Serial.write('A');
     delay(100);
+    digitalWrite(8,LOW);
   }
   /*
   int i;
