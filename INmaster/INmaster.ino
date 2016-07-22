@@ -22,7 +22,7 @@ XBeeLibrary XBee;
 const int LED0 = 8;
 const int LED1 = 9;
 const int LED2 = 10;
-#define waittime 5000    //各オブジェ待機時間
+#define waittime 2000    //各オブジェ待機時間
 #define gamelimit 33000   //ゲームの上限時間(33sec)
 volatile int mode = 0;    //点灯モード
 volatile int train = 0;  //電車
