@@ -17,17 +17,28 @@ struct TrainTime{
 
 struct TrainTime traintime[NOOP] = {
   {17, 1,true, true},//0   //17時から22時(終電)
-  {15,47,true, true},
-  {17, 4,true,false},
-  {17, 8,true, true},
-  {15,51,true, true},
-  {15,59,true,false},
-  {16,39,true, true},
-  {15,55,true,false},
-  {16,35,true, true},
-  {14,18,true,false},
-  {15,38,true, true},
-  {15, 0,true, true}
+  {17,26,false,true},
+  {17,40,false,false},
+  {17,47,true, true},
+  {18, 4,true,false},
+  {18, 8,true, true},
+  {18,32,false,true},
+  {18,46,false,false},
+  {18,51,true, true},
+  {18,59,true,false},
+  {19,16,false,true},
+  {19,38,false,false},
+  {19,39,true, true},
+  {19,53,false,true},
+  {19,55,true,false},
+  {20,33,false,false},
+  {20,35,true, true},
+  {21,01,false,true},
+  {21,18,true,false},
+  {21,38,true, true},
+  {21,51,false,true},
+  {21,59,false,false},
+  {22, 0,true, true}
 };
 
 void setup()
@@ -84,25 +95,3 @@ void loop()
   flag = false; //フラグを落とす
 
 }
-/*    delay(15000);
-    digitalWrite(13,LOW);
-
-    digitalWrite(12,HIGH);
-    delay(1000);
-    digitalWrite(12,LOW);
-  }
-
- if((tm.Hour==traintime[0].hour) && (tm.Minute==traintime[0].minute))
-  {
-    digitalWrite(13,HIGH);
-    delay(500);
-    digitalWrite(13,LOW);
-  }
-  else
-  {
-    digitalWrite(12,HIGH);
-    delay(500);
-    digitalWrite(12,LOW);
-  }
-}
-*/

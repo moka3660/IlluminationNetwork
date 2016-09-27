@@ -22,7 +22,7 @@ XBeeLibrary XBee;
 const int LED0 = 8;
 const int LED1 = 9;
 const int LED2 = 10;
-#define waittime 2000    //各オブジェ待機時間
+#define waittime 7000    //各オブジェ待機時間
 #define gamelimit 33000   //ゲームの上限時間(33sec)
 volatile int mode = 0;    //点灯モード
 volatile int train = 0;  //電車
@@ -52,7 +52,7 @@ void setup()        //セットアップ
   pinMode(A8,INPUT);//電車
   pinMode(A9,INPUT);//ゲーム
   //シリアル
-  Serial1.begin(9600);    //らずパイ
+//  Serial1.begin(9600);    //らずパイ
   Serial2.begin(9600);    //RTCのUNO
   Serial3.begin(9600);    //入力(C2班)
   //LED消灯
@@ -189,7 +189,7 @@ void ForwardSingle()    //順方向一つずつ
     //時間取得(i番目を点けた時間)
     time = millis();
     //    ontime = millis() - time;
-    // 15秒待機(終了状態が入力されたら離脱)
+    // waittime待機(終了状態が入力されたら離脱)
     while( ((millis() - time) < waittime) && (train==0) && (game==0) )
     {
       train = digitalRead(A8);
@@ -231,7 +231,7 @@ void ForwardAll()       //順方向つけていく
     XBee.loopAction();
     //時間取得(i番目を点けた時間)
     time = millis();
-    // 15秒待機(終了状態が入力されたら離脱)
+    // waittime待機(終了状態が入力されたら離脱)
     while(((millis()-time)<waittime)/*&&(train==0)&&(game==0)*/)
     {
       train = digitalRead(A8);
@@ -269,7 +269,7 @@ void ReverseSingle()    //逆方向一つずつ
     //時間取得(i番目を点けた時間)
     time = millis();
     //    ontime = millis() - time;
-    // 15秒待機(終了状態が入力されたら離脱)
+    // waittime待機(終了状態が入力されたら離脱)
     while(((millis()-time)<waittime)&&(train==0)&&(game==0))
     {
       train = digitalRead(A8);
@@ -310,7 +310,7 @@ void ReverseAll()       //逆方向つけていく
     XBee.loopAction();
     //時間取得(i番目を点けた時間)
     time = millis();
-    // 15秒待機(終了状態が入力されたら離脱)
+    // waittime待機(終了状態が入力されたら離脱)
     while(((millis()-time)<waittime)/*&&(train==0)&&(game==0)*/)
     {
       train = digitalRead(A8);
@@ -350,7 +350,7 @@ void RandomSingle()     //ランダム一つずつ
     XBee.loopAction();
     //時間取得(addr番目を点けた時間)
     time = millis();
-    // 15秒待機(終了状態が入力されたら離脱)
+    // waittime待機(終了状態が入力されたら離脱)
     while(((millis()-time)<waittime)&&(train==0)&&(game==0))
     {
       train = digitalRead(A8);
@@ -407,7 +407,7 @@ void RandomAll()        //ランダムつけていく
     XBee.loopAction();
     //時間取得(addr番目を点けた時間)
     time = millis();
-    // 15秒待機(終了状態が入力されたら離脱)
+    // waittime待機(終了状態が入力されたら離脱)
     while(((millis()-time)<waittime)&&(train==0)&&(game==0))
     {
       train = digitalRead(A8);
