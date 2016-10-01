@@ -49,7 +49,7 @@ void setup()        //セットアップ
   pinMode(LED2,OUTPUT); //割り込み時点灯
   pinMode(13,OUTPUT);
   //入力ピン
-  pinMode(A8,INPUT);//電車
+//  pinMode(A8,INPUT);//電車
   pinMode(A9,INPUT);//ゲーム
   //シリアル
 //  Serial1.begin(9600);    //らずパイ
@@ -192,7 +192,7 @@ void ForwardSingle()    //順方向一つずつ
     // waittime待機(終了状態が入力されたら離脱)
     while( ((millis() - time) < waittime) && (train==0) && (game==0) )
     {
-      train = digitalRead(A8);
+  //    train = digitalRead(A8);
       game = digitalRead(A9);
       //メッセージ受信チェック
       recieve = XBee.recieveRXData(i);//チェック必要
@@ -234,7 +234,7 @@ void ForwardAll()       //順方向つけていく
     // waittime待機(終了状態が入力されたら離脱)
     while(((millis()-time)<waittime)/*&&(train==0)&&(game==0)*/)
     {
-      train = digitalRead(A8);
+//      train = digitalRead(A8);
       game = digitalRead(A9);
       //メッセージ受信チェック
       recieve = XBee.recieveRXData(i);//チェック必要
@@ -272,7 +272,7 @@ void ReverseSingle()    //逆方向一つずつ
     // waittime待機(終了状態が入力されたら離脱)
     while(((millis()-time)<waittime)&&(train==0)&&(game==0))
     {
-      train = digitalRead(A8);
+//      train = digitalRead(A8);
       game = digitalRead(A9);
       //メッセージ受信チェック
       recieve = XBee.recieveRXData(i);//チェック必要
@@ -313,7 +313,7 @@ void ReverseAll()       //逆方向つけていく
     // waittime待機(終了状態が入力されたら離脱)
     while(((millis()-time)<waittime)/*&&(train==0)&&(game==0)*/)
     {
-      train = digitalRead(A8);
+//      train = digitalRead(A8);
       game = digitalRead(A9);
       //メッセージ受信チェック
       recieve = XBee.recieveRXData(i);//チェック必要
@@ -353,7 +353,7 @@ void RandomSingle()     //ランダム一つずつ
     // waittime待機(終了状態が入力されたら離脱)
     while(((millis()-time)<waittime)&&(train==0)&&(game==0))
     {
-      train = digitalRead(A8);
+  //    train = digitalRead(A8);
       game = digitalRead(A9);
       //メッセージ受信チェック
       recieve = XBee.recieveRXData(i);//チェック必要
@@ -410,7 +410,7 @@ void RandomAll()        //ランダムつけていく
     // waittime待機(終了状態が入力されたら離脱)
     while(((millis()-time)<waittime)&&(train==0)&&(game==0))
     {
-      train = digitalRead(A8);
+  //    train = digitalRead(A8);
       game = digitalRead(A9);
       //メッセージ受信チェック
       recieve = XBee.recieveRXData(i);//チェック必要

@@ -2,7 +2,7 @@
 #include<TimeLib.h>
 #include<DS1307RTC.h>
 
-#define NOOP  12
+#define NOOP  23
 
 bool flag = false;
 
